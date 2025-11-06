@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>100 Soal Pilihan Ganda Pramuka Level 2 - Slideshow Otomatis</title>
+  <style>
+    :root{
+      --brand:#8a2be2; /* ungu sesuai permintaan */
+      --bg:#f4f4f9;
+      --fg:#333;
+      --card:#fff;
+      --muted:#999;
+      --border:#e3e3ec;
+    }
+    *{box-sizing:border-box}
+    body{font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Ubuntu, 'Noto Sans', sans-serif; background:var(--bg); color:var(--fg); margin:0}
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(6px);
+      background:linear-gradient(0deg,rgba(244,244,249,.75),rgba(244,244,249,.95));
+      border-bottom:1px solid var(--border);
+    }
+    .toolbar{display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; padding:.75rem 1rem}
+    .toolbar h1{font-size:1rem; margin:0; color:var(--brand); font-weight:700}
+    .spacer{flex:1}
+    button, select, input[type="number"]{
+      appearance:none; border:1px solid var(--border); background:#fff; color:#222; border-radius:10px; padding:.5rem .75rem; font-size:.9rem; line-height:1; box-shadow:0 1px 2px rgba(0,0,0,.04);
+    }
+    button{cursor:pointer}
+    button.primary{background:var(--brand); color:#fff; border-color:transparent}
+    button.ghost{background:transparent}
+    button:disabled{opacity:.5; cursor:not-allowed}
+    label{font-size:.8rem; color:#555}
+
+    .progress-wrap{padding:.25rem 1rem 1rem}
+    .progress-bar{height:8px; width:100%; background:#eaeaf3; border-radius:999px; overflow:hidden}
+    .progress{height:100%; width:0%; background:var(--brand); transition:width .25s linear}
+    .timers{display:flex; justify-content:space-between; font-size:.8rem; color:#555; margin-top:.35rem}
+
+    main{padding:20px}
+    .slide{background:var(--card); border:1px solid #ddd; border-radius:12px; padding:28px; box-shadow:0 6px 16px rgba(0,0,0,.06); margin:0 auto 20px; max-width:1100px; display:none}
+    .slide.active{display:block}
+    h2{color:var(--brand); border-bottom:2px solid var(--brand); padding-bottom:10px; margin-top:0}
+    .grid-container{display:grid; grid-template-columns:1fr 1fr; gap:30px}
+    .question{margin-bottom:22px; padding-right:12px}
+    .question strong{color:#444}
+    .options{list-style-type: upper-alpha; padding-left: 20px;}
+    .options li{margin-bottom:6px}
+    .slide-footer{text-align:right; color:var(--muted); font-size:.9em; margin-top:10px}
+
+    footer{position:sticky; bottom:0; z-index:40; background:linear-gradient(180deg,rgba(244,244,249,.85),rgba(244,244,249,.98)); border-top:1px solid var(--border)}
+    .foot{display:flex; align-items:center; justify-content:center; gap:.75rem; padding:.6rem 1rem; font-size:.9rem; color:#666}
+
+    /* responsif */
+    @media (max-width:900px){
+      .grid-container{grid-template-columns:1fr}
+      .toolbar{gap:.4rem}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="toolbar" role="region" aria-label="Kontrol slideshow">
+      <h1>100 Soal Pramuka (Level Sulit)</h1>
+      <div class="spacer"></div>
+      <button id="prevBtn" title="Sebelumnya">⟨ Sebelumnya</button>
+      <button id="playPauseBtn" class="primary" title="Jeda / Putar">⏸ Jeda</button>
+      <button id="nextBtn" title="Selanjutnya">Selanjutnya ⟩</button>
+      <label for="slideSelect">Slide:</label>
+      <select id="slideSelect" title="Lompat ke slide"></select>
+      <label for="durationInput">Durasi/slide (detik):</label>
+      <input id="durationInput" type="number" min="10" step="5" value="120" style="width:90px" />
+      <button id="resetTimerBtn" class="ghost" title="Ulangi hitung mundur slide ini">↻ Reset</button>
+      <label><input type="checkbox" id="loopToggle" checked /> Loop</label>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" aria-hidden="true"><div id="progress" class="progress"></div></div>
+      <div class="timers"><span id="statusText">Slide 1/10</span><span id="countdown">02:00</span></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======= KONTEN SLIDE DARI PENGGUNA (100 SOAL / 10 SLIDE) ======= -->
+
+    <h1 style="text-align: center; color: var(--brand);">100 SOAL PILIHAN GANDA PRAMUKA (LEVEL SULIT)</h1>
+    <h3 style="text-align: center; color: #555;">(Materi Acak dan Seimbang dari Modul Logika Season)</h3>
+
+    <!-- SLIDE 1 -->
+    <div class="slide">
+        <h2>📝 SLIDE 1 (Soal 1 - 10)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>1. Berdasarkan AD & ART Gerakan Pramuka Pasal 5, penyelenggaraan pendidikan nonformal sebagai wadah pembinaan kaum muda berlandaskan pada Prinsip Dasar Kepramukaan, Metode Kepramukaan, serta...</strong>
+                    <ol class="options">
+                        <li>A. Sistem Tanda Kecakapan.</li>
+                        <li>B. Sistem Berkelompok.</li>
+                        <li>C. Sistem Among.</li>
+                        <li>D. Sistem Kwartir Nasional.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>2. Pendiri Kerajaan Samudera Pasai, Malik Al-Salih, memiliki nama asli...</strong>
+                    <ol class="options">
+                        <li>A. Sultan Zainal Abidin II.</li>
+                        <li>B. Maulana Hasanuddin.</li>
+                        <li>C. Meurah Silu.</li>
+                        <li>D. Pangeran Sabakingkin.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>3. Dalam Trisatya, kewajiban terhadap Pancasila terletak pada kewajiban ke-...</strong>
+                    <ol class="options">
+                        <li>A. 1.</li>
+                        <li>B. 2.</li>
+                        <li>C. 3.</li>
+                        <li>D. 4.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>4. Jambore Dunia di Godollo, Budapest, Hungaria pada tahun 1933 merupakan penyelenggaraan Jambore ke-...</strong>
+                    <ol class="options">
+                        <li>A. III.</li>
+                        <li>B. IV.</li>
+                        <li>C. V.</li>
+                        <li>D. VI.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>5. Salah satu TKK wajib yang termasuk dalam 10 TKK wajib berdasarkan Keputusan Kwarnas adalah...</strong>
+                    <ol class="options">
+                        <li>A. TKK Juru Bahasa.</li>
+                        <li>B. TKK Menjahit.</li>
+                        <li>C. TKK Pengemudi.</li>
+                        <li>D. TKK Elektronika.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>6. Kepemimpinan di Gerakan Pramuka diarahkan untuk membentuk pemimpin yang bertanggung jawab pada 5 faktor, di antaranya adalah Keluarga, Masyarakat, Bangsa dan negara, Tuhan Yang Maha Esa, serta...</strong>
+                    <ol class="options">
+                        <li>A. Sekolah.</li>
+                        <li>B. Diri sendiri.</li>
+                        <li>C. Organisasi.</li>
+                        <li>D. Pembina.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>7. Organisasi kepanduan di Filipina dikenal dengan nama...</strong>
+                    <ol class="options">
+                        <li>A. Persekutuan Pengakap Malaysia.</li>
+                        <li>B. The Singapore Scout Association.</li>
+                        <li>C. Kapatiran Scouting Philifinas.</li>
+                        <li>D. The Bharat Scout And Guides.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>8. Baden-Powell sempat menulis pengalamannya dalam buku "Aids To Scouting" setelah kembali ke Inggris pada tahun...</strong>
+                    <ol class="options">
+                        <li>A. 1899.</li>
+                        <li>B. 1900.</li>
+                        <li>C. 1901.</li>
+                        <li>D. 1907.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>9. Dibandingkan Trisatya Penggalang, Trisatya Penegak menggunakan kalimat yang menunjukkan tingkat kemandirian lebih tinggi, yaitu...</strong>
+                    <ol class="options">
+                        <li>A. 'Menggalang masyarakat'.</li>
+                        <li>B. 'Membangun masyarakat seutuhnya'.</li>
+                        <li>C. 'Ikut serta membangun masyarakat'.</li>
+                        <li>D. 'Mempersiapkan diri untuk membangun masyarakat'.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>10. Raja Kutai yang merupakan cucu dari Maharaja Kudungga dan terkenal karena kedermawanannya adalah...</strong>
+                    <ol class="options">
+                        <li>A. Maharaja Aswawarman.</li>
+                        <li>B. Maharaja Gadingga Warman Dewa.</li>
+                        <li>C. Maharaja Mulawarman.</li>
+                        <li>D. Maharaja Jayanaga Warman.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide">
+        <h2>📝 SLIDE 2 (Soal 11 - 20)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>11. Dalam Metode Kepramukaan, sistem berkelompok digunakan untuk...</strong>
+                    <ol class="options">
+                        <li>A. Memudahkan pengawasan Pembina.</li>
+                        <li>B. Mengembangkan rasa tanggung jawab dan kerja sama.</li>
+                        <li>C. Mempercepat penyelesaian TKK.</li>
+                        <li>D. Membentuk pemimpin yang otoriter.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>12. Presiden RI yang lahir di Jombang, Jawa Timur, 7 September 1940 adalah...</strong>
+                    <ol class="options">
+                        <li>A. Ir. H. Joko Widodo.</li>
+                        <li>B. Jend. TNI. H.M. Soeharto.</li>
+                        <li>C. KH. Abdurrahman Wahid.</li>
+                        <li>D. Prof. Dr. Ing. H. B. J. Habibie.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>13. Kepanduan untuk golongan Siaga didirikan pada tahun 1916 dan didasari oleh buku...</strong>
+                    <ol class="options">
+                        <li>A. Aids To Scouting.</li>
+                        <li>B. Scouting For Boys.</li>
+                        <li>C. The Jungle Book.</li>
+                        <li>D. Rovering To Success.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>14. Tanda Pemimpin dan Wakil Pemimpin Regu merupakan contoh dari Tanda...</strong>
+                    <ol class="options">
+                        <li>A. Umum.</li>
+                        <li>B. Satuan.</li>
+                        <li>C. Jabatan.</li>
+                        <li>D. Kecakapan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>15. Pernyataan yang <em>benar</em> mengenai sifat kepanduan berdasarkan Resolusi Konferensi Kepramukaan Sedunia 1924 adalah...</strong>
+                    <ol class="options">
+                        <li>A. Nasional: disesuaikan dengan AD/ART Gerakan Pramuka.</li>
+                        <li>B. Internasional: bertujuan membentuk persaudaraan antar sesama anggota.</li>
+                        <li>C. Universal: berlaku hanya untuk Siaga dan Penggalang.</li>
+                        <li>D. Sukarela: tidak membedakan suku, ras, golongan, dan agama.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>16. Jambore Nasional tahun 1991, 1996, dan 1986 semuanya diselenggarakan di...</strong>
+                    <ol class="options">
+                        <li>A. Situ Baru, DKI Jakarta.</li>
+                        <li>B. Sibolangit, Sumatera Utara.</li>
+                        <li>C. Cibubur, DKI Jakarta.</li>
+                        <li>D. Baturaden, Banyumas, Jawa Tengah.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>17. Konferensi Kepanduan Sedunia (WSC) adalah lembaga pemerintahan kepanduan yang bertemu setiap...</strong>
+                    <ol class="options">
+                        <li>A. Satu tahun sekali.</li>
+                        <li>B. Dua tahun sekali.</li>
+                        <li>C. Tiga tahun sekali.</li>
+                        <li>D. Lima tahun sekali.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>18. Perhatikan Benteng: 1. Inang Bale (Aceh), 2. Surason (Banten), 3. Jagaraga (Bali). Benteng manakah yang terletak di luar pulau Jawa dan Bali?</strong>
+                    <ol class="options">
+                        <li>A. 1.</li>
+                        <li>B. 2.</li>
+                        <li>C. 3.</li>
+                        <li>D. 1, 2, dan 3.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>19. Tingkatan tertinggi pada Tanda Kecakapan Umum (TKU) untuk golongan Penggalang adalah...</strong>
+                    <ol class="options">
+                        <li>A. Mula.</li>
+                        <li>B. Rakit.</li>
+                        <li>C. Terap.</li>
+                        <li>D. Bantara.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>20. Kiasan dasar PENEGAK dikaitkan dengan peristiwa Proklamasi Kemerdekaan RI pada tanggal 17 Agustus 1945, yang maknanya adalah masa...</strong>
+                    <ol class="options">
+                        <li>A. Menyiagakan masyarakat.</li>
+                        <li>B. Menggalang persatuan.</li>
+                        <li>C. Menegakkan negara.</li>
+                        <li>D. Memandegani pembangunan.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide">
+        <h2>📝 SLIDE 3 (Soal 21 - 30)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>21. Seorang Pembina Pramuka yang telah menamatkan semua tingkatan TKU dan TKK wajib, berhak mendapatkan TKU tingkat...</strong>
+                    <ol class="options">
+                        <li>A. Terap.</li>
+                        <li>B. Laksana.</li>
+                        <li>C. Pandega.</li>
+                        <li>D. Mahir.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>22. Organisasi kepanduan di Indonesia yang didirikan pada tahun 1916 oleh Sultan Pangeran Mangkunegara VII di Surakarta adalah...</strong>
+                    <ol class="options">
+                        <li>A. IPINDO.</li>
+                        <li>B. PERKINDO.</li>
+                        <li>C. Nederland Indische Padvinders Vereniging (NIPV).</li>
+                        <li>D. Javaanse Padvinders Organisatie (JPO).</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>23. Siapakah Presiden RI yang lahir dengan nama Koesno Sosrodihardjo?</strong>
+                    <ol class="options">
+                        <li>A. Jend. TNI. H.M. Soeharto.</li>
+                        <li>B. Dr. Ir. H. Soekarno.</li>
+                        <li>C. Prof. Dr. Ing. H. B. J. Habibie.</li>
+                        <li>D. KH. Abdurrahman Wahid.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>24. Salah satu Karang-karang kehidupan yang disebutkan dalam buku <em>Rovering To Success</em> yang bersifat sosiologis adalah...</strong>
+                    <ol class="options">
+                        <li>A. Karang wanita.</li>
+                        <li>B. Karang minuman keras dan merokok.</li>
+                        <li>C. Karang perjudian.</li>
+                        <li>D. Karang mementingkan diri sendiri (egois) dan mengorbankan orang lain.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>25. Apa arti dari kata <em>Among</em> yang menjadi dasar dari Sistem Among?</strong>
+                    <ol class="options">
+                        <li>A. Memberi dorongan.</li>
+                        <li>B. Membangun.</li>
+                        <li>C. Mengasuh, memelihara, atau menjaga.</li>
+                        <li>D. Memimpin dengan teladan.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>26. Jambore Dunia di Moisson, Perancis pada tahun 1947 merupakan Jambore Dunia ke-...</strong>
+                    <ol class="options">
+                        <li>A. V.</li>
+                        <li>B. VI.</li>
+                        <li>C. VII.</li>
+                        <li>D. VIII.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>27. Berdasarkan Keputusan Kwarnas, Lambang Gerakan Pramuka ditetapkan pada tahun...</strong>
+                    <ol class="options">
+                        <li>A. 1961.</li>
+                        <li>B. 1972.</li>
+                        <li>C. 1974.</li>
+                        <li>D. 1982.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>28. Saka yang bidangnya adalah Bidang Belanegara adalah...</strong>
+                    <ol class="options">
+                        <li>A. Saka Bhayangkara.</li>
+                        <li>B. Saka Dirgantara.</li>
+                        <li>C. Saka Taruna Bumi.</li>
+                        <li>D. Saka Wirakartika.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>29. Istilah bahasa Inggris untuk Penggalang Putra adalah...</strong>
+                    <ol class="options">
+                        <li>A. Cub Scout.</li>
+                        <li>B. Boy Scout.</li>
+                        <li>C. Rover Scout.</li>
+                        <li>D. Senior Rover Scout.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>30. Di mana lokasi Makam Raja Mataram?</strong>
+                    <ol class="options">
+                        <li>A. Demak.</li>
+                        <li>B. Surabaya.</li>
+                        <li>C. Imogiri.</li>
+                        <li>D. Banten.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide">
+        <h2>📝 SLIDE 4 (Soal 31 - 40)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>31. Organisasi kepanduan di Indonesia sebelum menjadi Pramuka yang terdiri dari 3 federasi bergabung menjadi PERKINDO, yaitu IPINDO, POPPINDO, dan...</strong>
+                    <ol class="options">
+                        <li>A. Kwarda.</li>
+                        <li>B. Kwartir.</li>
+                        <li>C. PKPI.</li>
+                        <li>D. NIPV.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>32. Apa nama organisasi olahraga internasional untuk cabang Voli?</strong>
+                    <ol class="options">
+                        <li>A. IHF.</li>
+                        <li>B. FEI.</li>
+                        <li>C. IVBF.</li>
+                        <li>D. FOTA.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>33. Lambang Gerakan Pramuka yang berupa tunas kelapa pertama kali dipergunakan sejak tanggal...</strong>
+                    <ol class="options">
+                        <li>A. 20 Mei 1908.</li>
+                        <li>B. 17 Agustus 1945.</li>
+                        <li>C. 14 Agustus 1961.</li>
+                        <li>D. 14 Agustus 1972.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>34. Masa jabatan Presiden RI ke-4 KH. Abdurrahman Wahid adalah dari tahun 1999 sampai...</strong>
+                    <ol class="options">
+                        <li>A. 2000.</li>
+                        <li>B. 2001.</li>
+                        <li>C. 2004.</li>
+                        <li>D. 2009.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>35. Jambore Dunia ke-XV yang seharusnya diselenggarakan di Neishabour, Iran pada tahun 1979, dibatalkan karena...</strong>
+                    <ol class="options">
+                        <li>A. Perang Dunia II.</li>
+                        <li>B. Bencana alam.</li>
+                        <li>C. Revolusi Iran.</li>
+                        <li>D. Pandemi global.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>36. Fungsi Kepramukaan, berdasarkan AD & ART, adalah sebagai wadah pembinaan dan pengembangan kaum muda dengan menerapkan...</strong>
+                    <ol class="options">
+                        <li>A. Sifat Kepanduan 1924.</li>
+                        <li>B. Kode Kehormatan dan Kiasan Dasar.</li>
+                        <li>C. Prinsip Dasar dan Metode Kepramukaan.</li>
+                        <li>D. Sistem Kwartir dan Andalan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>37. Apa nama benteng bersejarah yang berada di Aceh?</strong>
+                    <ol class="options">
+                        <li>A. Benteng Surason.</li>
+                        <li>B. Benteng Bonjol.</li>
+                        <li>C. Benteng Duurstede.</li>
+                        <li>D. Benteng Inang Bale.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>38. Kiasan dasar PENGGALANG dikaitkan dengan peristiwa Sumpah Pemuda pada tanggal 28 Oktober 1928, yang maknanya adalah masa...</strong>
+                    <ol class="options">
+                        <li>A. Menyiagakan masyarakat.</li>
+                        <li>B. Menggalang persatuan dan kesatuan pemuda.</li>
+                        <li>C. Menegakkan negara.</li>
+                        <li>D. Memandegani pembangunan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>39. Orang yang melakukan sistem among dalam Gerakan Pramuka disebut...</strong>
+                    <ol class="options">
+                        <li>A. Pembina.</li>
+                        <li>B. Pelatih.</li>
+                        <li>C. Pamong.</li>
+                        <li>D. Andalan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>40. Ibu Baden-Powell, Miss Henrietta Grace Smyth, mempunyai kakek seorang...</strong>
+                    <ol class="options">
+                        <li>A. Guru besar Geometri.</li>
+                        <li>B. Kolonel.</li>
+                        <li>C. Admiral Kerajaan Inggris.</li>
+                        <li>D. Penulis Inggris.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide">
+        <h2>📝 SLIDE 5 (Soal 41 - 50)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>41. Jabatan Ketua Kwartir yang berfungsi sebagai pemimpin yang bisa diandalkan disebut...</strong>
+                    <ol class="options">
+                        <li>A. Pembina.</li>
+                        <li>B. Instruktur.</li>
+                        <li>C. Andalan.</li>
+                        <li>D. Pamong Saka.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>42. Siapakah Presiden RI yang berasal dari golongan militer yang menjabat paling lama (1967-1998)?</strong>
+                    <ol class="options">
+                        <li>A. Jend. Susilo Bambang Yudhoyono.</li>
+                        <li>B. Jend. TNI. H.M. Soeharto.</li>
+                        <li>C. Dr. Ir. H. Soekarno.</li>
+                        <li>D. Prabowo Subianto.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>43. Keanggotaan Gerakan Pramuka bersifat sukarela, mandiri, tidak membedakan suku, ras, golongan, dan...</strong>
+                    <ol class="options">
+                        <li>A. Status sosial.</li>
+                        <li>B. Kedudukan.</li>
+                        <li>C. Agama.</li>
+                        <li>D. Jabatan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>44. Tingkatan TKK yang paling dasar (Purwa) ditandai dengan bentuk...</strong>
+                    <ol class="options">
+                        <li>A. Segi Lima.</li>
+                        <li>B. Kotak.</li>
+                        <li>C. Lingkaran.</li>
+                        <li>D. Segitiga.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>45. World Association of Girl Guides and Girl Scout (WAGGGS) adalah organisasi untuk Pandu Putri yang berkantor pusat di...</strong>
+                    <ol class="options">
+                        <li>A. Jenewa, Swiss.</li>
+                        <li>B. Ottawa, Kanada.</li>
+                        <li>C. London, Inggris.</li>
+                        <li>D. Kopenhagen, Denmark.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>46. Tipe kepemimpinan yang paling ideal dalam konteks partisipasi anggota adalah...</strong>
+                    <ol class="options">
+                        <li>A. Otoriter.</li>
+                        <li>B. Pribadi.</li>
+                        <li>C. Demokratis.</li>
+                        <li>D. Paternalitis.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>47. Jambore Dunia ke-X (1959) diselenggarakan di...</strong>
+                    <ol class="options">
+                        <li>A. Yunani.</li>
+                        <li>B. Filipina (Makiling).</li>
+                        <li>C. Amerika Serikat.</li>
+                        <li>D. Jepang.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>48. Kerajaan Kutai Martadipura terletak di Muara Kaman, Kalimantan Timur, tepatnya di hulu Sungai...</strong>
+                    <ol class="options">
+                        <li>A. Barito.</li>
+                        <li>B. Kapuas.</li>
+                        <li>C. Mahakam.</li>
+                        <li>D. Siak.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>49. Istilah <em>Rakit</em> pada golongan Penggalang mengkiaskan...</strong>
+                    <ol class="options">
+                        <li>A. Masa awal mengumpulkan.</li>
+                        <li>B. Masa mulai merangkai dan membangun persatuan.</li>
+                        <li>C. Masa perwujudan persatuan.</li>
+                        <li>D. Masa menegakkan negara.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>50. Prinsip Dasar Kepramukaan meliputi Iman dan takwa kepada Tuhan Yang Maha Esa, Peduli terhadap bangsa dan tanah air, Peduli terhadap diri pribadinya, dan...</strong>
+                    <ol class="options">
+                        <li>A. Belajar sambil melakukan.</li>
+                        <li>B. Taat kepada Kode Kehormatan Pramuka.</li>
+                        <li>C. Sistem tanda kecakapan.</li>
+                        <li>D. Kegiatan di alam terbuka.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+        <h2>📝 SLIDE 6 (Soal 51 - 60)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>51. Apa nama organisasi olahraga internasional untuk cabang Tenis Meja?</strong>
+                    <ol class="options">
+                        <li>A. IJF.</li>
+                        <li>B. ITTF.</li>
+                        <li>C. IHF.</li>
+                        <li>D. UCI.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>52. Pangkat terakhir Baden-Powell saat meletakkan jabatannya di dinas ketentaraan pada tahun 1910 adalah...</strong>
+                    <ol class="options">
+                        <li>A. Kolonel.</li>
+                        <li>B. Mayor Jendral.</li>
+                        <li>C. Letnan Jendral.</li>
+                        <li>D. Pembantu Letnan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>53. Tujuan Gerakan Pramuka yang terkait dengan Pancasila adalah...</strong>
+                    <ol class="options">
+                        <li>A. Berjiwa patriotik dan taat hukum.</li>
+                        <li>B. Memiliki kecakapan hidup.</li>
+                        <li>C. Menjaga dan membangun Negara Kesatuan Republik Indonesia.</li>
+                        <li>D. Mengamalkan Pancasila.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>54. Jambore Nasional yang diselenggarakan di Sibolangit, Sumatera Utara, terjadi pada tahun...</strong>
+                    <ol class="options">
+                        <li>A. 1973.</li>
+                        <li>B. 1977.</li>
+                        <li>C. 1981.</li>
+                        <li>D. 1986.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>55. Metode Kepramukaan yang merupakan salah satu cara belajar progresif adalah...</strong>
+                    <ol class="options">
+                        <li>A. Penerapan Prinsip Dasar Kepramukaan.</li>
+                        <li>B. Sistem satuan terpisah untuk putra dan putri.</li>
+                        <li>C. Pengamalan Kode Kehormatan Pramuka.</li>
+                        <li>D. Belajar sambil menghafal.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>56. Salah satu faktor yang harus dipahami dalam menggerakkan orang lain (selain Kepemimpinan dan Komunikasi) adalah...</strong>
+                    <ol class="options">
+                        <li>A. Pengawasan.</li>
+                        <li>B. Evaluasi.</li>
+                        <li>C. Instruksi.</li>
+                        <li>D. Motivasi.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>57. Siapakah Presiden RI ke-8 yang terpilih pada Pemilu 2024?</strong>
+                    <ol class="options">
+                        <li>A. Ir. H. Joko Widodo.</li>
+                        <li>B. Jend. Susilo Bambang Yudhoyono.</li>
+                        <li>C. Prabowo Subianto.</li>
+                        <li>D. Prof. Dr. Ing. H. B. J. Habibie.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>58. Jambore Dunia ke-VIII (1955) diselenggarakan di...</strong>
+                    <ol class="options">
+                        <li>A. Austria.</li>
+                        <li>B. Kanada (Nouveaux).</li>
+                        <li>C. Filipina.</li>
+                        <li>D. Inggris.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>59. Perbedaan utama antara Tanda Kecakapan Khusus (TKK) Penggalang dan Penegak adalah...</strong>
+                    <ol class="options">
+                        <li>A. Jumlah tingkatan (Penggalang 1, Penegak 3).</li>
+                        <li>B. Warna bingkai (Penggalang merah, Penegak kuning).</li>
+                        <li>C. Bentuk TKK (Penggalang lingkaran, Penegak kotak).</li>
+                        <li>D. TKK Penggalang tidak wajib, TKK Penegak wajib.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>60. Lambang Gerakan Pramuka (Tunas Kelapa) ditetapkan dengan Keputusan Presiden Republik Indonesia Nomor 448 tahun 1961, yang menganugrahkan...</strong>
+                    <ol class="options">
+                        <li>A. Satuan Karya Pramuka.</li>
+                        <li>B. Bintang Tunas Kelapa.</li>
+                        <li>C. Panji Gerakan Pendidikan Kepanduan Nasional Indonesia.</li>
+                        <li>D. Keppres tentang Gerakan Pramuka.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide">
+        <h2>📝 SLIDE 7 (Soal 61 - 70)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>61. Kiasan dasar SIAGA dikaitkan dengan peristiwa Kebangkitan Nasional pada tanggal 20 Mei 1908, yang maknanya adalah masa...</strong>
+                    <ol class="options">
+                        <li>A. Menyiagakan masyarakat ketika menghadapi pemerintah kolonial Belanda.</li>
+                        <li>B. Menggalang persatuan dan kesatuan.</li>
+                        <li>C. Menegakkan negara.</li>
+                        <li>D. Memandegani pembangunan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>62. Jamboree Dunia ke-XXII (2011) diselenggarakan di Kristianstad, yang berada di negara...</strong>
+                    <ol class="options">
+                        <li>A. Jepang.</li>
+                        <li>B. Inggris.</li>
+                        <li>C. Swedia.</li>
+                        <li>D. Thailand.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>63. Gelar yang diberikan kepada Baden-Powell sebagai penghargaan atas jasa-jasanya di kota Mafeking adalah...</strong>
+                    <ol class="options">
+                        <li>A. Chief Scout Of The World.</li>
+                        <li>B. Mayor Jendral.</li>
+                        <li>C. Letnan Jendral.</li>
+                        <li>D. Lord Baden-Powell Of Gilwell.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>64. Saka yang bergerak di bidang Pertanian adalah...</strong>
+                    <ol class="options">
+                        <li>A. Saka Bhakti Husada.</li>
+                        <li>B. Saka Wana Bakti.</li>
+                        <li>C. Saka Taruna Bumi.</li>
+                        <li>D. Saka Kencana.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>65. Prinsip Dasar Kepramukaan dan Metode Kepramukaan dilaksanakan sesuai dengan kepentingan, kebutuhan, situasi dan kondisi...</strong>
+                    <ol class="options">
+                        <li>A. Anggota muda.</li>
+                        <li>B. Organisasi kepanduan internasional.</li>
+                        <li>C. Pemerintah dan negara.</li>
+                        <li>D. Masyarakat.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>66. Di manakah Makam Sunan Ampel berada?</strong>
+                    <ol class="options">
+                        <li>A. Demak.</li>
+                        <li>B. Gresik.</li>
+                        <li>C. Surabaya.</li>
+                        <li>D. Imogiri.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>67. Di antara Pertemuan Pramuka berikut, manakah yang ditujukan untuk golongan Penegak dan Pandega?</strong>
+                    <ol class="options">
+                        <li>A. Lomba Tingkat.</li>
+                        <li>B. Pesta Siaga.</li>
+                        <li>C. Gladian Pemimpin Regu (Dian Pinru).</li>
+                        <li>D. Perkemahan Wirakarya (PW).</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>68. Istilah bahasa Inggris untuk Pandega Putra adalah...</strong>
+                    <ol class="options">
+                        <li>A. Rover Scout.</li>
+                        <li>B. Senior Rover Scout.</li>
+                        <li>C. Boy Scout.</li>
+                        <li>D. Cub Scout.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>69. Jabatan Tanda Pembina, Tanda Pelatih, dan Tanda Pamong Saka termasuk dalam kategori Tanda...</strong>
+                    <ol class="options">
+                        <li>A. Umum.</li>
+                        <li>B. Satuan.</li>
+                        <li>C. Jabatan.</li>
+                        <li>D. Kehormatan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>70. Apa nama organisasi olahraga internasional untuk cabang Basket?</strong>
+                    <ol class="options">
+                        <li>A. IHF.</li>
+                        <li>B. ITTF.</li>
+                        <li>C. FIBA.</li>
+                        <li>D. FOTA.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide">
+        <h2>📝 SLIDE 8 (Soal 71 - 80)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>71. Nama lengkap Baden-Powell adalah Robert Stephenson Smyth Baden-Powell. Nama kecilnya yang paling sering dipanggil adalah...</strong>
+                    <ol class="options">
+                        <li>A. Robert.</li>
+                        <li>B. Steevie.</li>
+                        <li>C. Sir Robert.</li>
+                        <li>D. Ste.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>72. Boy Scouts diilhami oleh organisasi Woodcraft Indian, yang dipelopori oleh seorang penulis Inggris kelahiran Kanada bernama...</strong>
+                    <ol class="options">
+                        <li>A. Daniel Carter Beard.</li>
+                        <li>B. Ernest Thompson Seton.</li>
+                        <li>C. William T. Smyth.</li>
+                        <li>D. Charles Darwin.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>73. Yang merupakan contoh dari Tanda Kehormatan adalah...</strong>
+                    <ol class="options">
+                        <li>A. Tanda Pelantikan.</li>
+                        <li>B. Tanda Saka.</li>
+                        <li>C. Lencana Karya Bakti.</li>
+                        <li>D. Tanda Kecakapan Umum.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>74. Sultan Samudera Pasai yang pada masanya kerajaan mencapai masa kejayaannya adalah...</strong>
+                    <ol class="options">
+                        <li>A. Malik Al-Salih.</li>
+                        <li>B. Sultan Zainal Abidin II.</li>
+                        <li>C. Maulana Hasanuddin.</li>
+                        <li>D. Maulana Yusuf.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>75. Prinsip Dasar Kepramukaan yang menekankan pada tanggung jawab sosial adalah...</strong>
+                    <ol class="options">
+                        <li>A. Iman dan takwa kepada Tuhan Yang Maha Esa.</li>
+                        <li>B. Peduli terhadap diri pribadinya.</li>
+                        <li>C. Taat kepada Kode Kehormatan Pramuka.</li>
+                        <li>D. Peduli terhadap bangsa dan tanah air, sesama hidup dan alam seisinya.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>76. Jambore Nasional tahun 2006 diselenggarakan di Jatinangor, yang berada di provinsi...</strong>
+                    <ol class="options">
+                        <li>A. DKI Jakarta.</li>
+                        <li>B. Banten.</li>
+                        <li>C. Jawa Tengah.</li>
+                        <li>D. Jawa Barat.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>77. Di antara tokoh berikut, siapakah yang tidak menjabat sebagai Kepala Biro Kepanduan Sedunia?</strong>
+                    <ol class="options">
+                        <li>A. Kolonel J. S. Wilson.</li>
+                        <li>B. Luc Panissod.</li>
+                        <li>C. Lady Baden-Powell.</li>
+                        <li>D. Dr. Laszlo Nagy.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>78. Jenderal TNI (Purn.) Prof. Dr. H. Susilo Bambang Yudhoyono lahir di...</strong>
+                    <ol class="options">
+                        <li>A. Surabaya.</li>
+                        <li>B. Yogyakarta.</li>
+                        <li>C. Parepare.</li>
+                        <li>D. Tremas, Pacitan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>79. Konferensi Kepanduan Sedunia (WSC) dihadiri oleh berapa orang delegasi dari setiap organisasi anggota WOSM?</strong>
+                    <ol class="options">
+                        <li>A. Dua orang.</li>
+                        <li>B. Empat orang.</li>
+                        <li>C. Enam orang.</li>
+                        <li>D. Sepuluh orang.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>80. Salah satu Karang-karang kehidupan dalam <em>Rovering To Success</em> yang bersifat etis adalah...</strong>
+                    <ol class="options">
+                        <li>A. Karang wanita.</li>
+                        <li>B. Karang perjudian.</li>
+                        <li>C. Karang tidak bertuhan (atheis).</li>
+                        <li>D. Karang minuman keras dan merokok.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+    <!-- SLIDE 9 -->
+    <div class="slide">
+        <h2>📝 SLIDE 9 (Soal 81 - 90)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>81. Bapak dari Baden-Powell, Prof. Domine, merupakan guru besar di Universitas...</strong>
+                    <ol class="options">
+                        <li>A. Cambridge.</li>
+                        <li>B. London.</li>
+                        <li>C. Oxford.</li>
+                        <li>D. Charterhouse.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>82. Apa nama organisasi olahraga internasional untuk cabang Berkuda?</strong>
+                    <ol class="options">
+                        <li>A. IJF.</li>
+                        <li>B. FEI.</li>
+                        <li>C. UCI.</li>
+                        <li>D. IVBF.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>83. Keppres No. 238/61 tentang Gerakan Pramuka ditandatangani oleh Perdana Menteri RI Ir. H. Juanda karena pada saat itu...</strong>
+                    <ol class="options">
+                        <li>A. Ir. H. Juanda adalah Ketua Kwarnas.</li>
+                        <li>B. Presiden Soekarno sedang mengadakan kunjungan kenegaraan ke negara Jepang.</li>
+                        <li>C. Ir. H. Juanda adalah pendiri Gerakan Pramuka.</li>
+                        <li>D. Presiden Soekarno sedang sakit.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>84. Perkemahan Wirakarya (PW) adalah pertemuan yang ditujukan untuk...</strong>
+                    <ol class="options">
+                        <li>A. Pembina yang telah bersertifikat mahir.</li>
+                        <li>B. Anggota Siaga dan Penggalang.</li>
+                        <li>C. Anggota Penegak dan Pandega.</li>
+                        <li>D. Seluruh anggota Pramuka di tingkat Nasional.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>85. Istilah <em>Mula</em> pada golongan Siaga mengkiaskan...</strong>
+                    <ol class="options">
+                        <li>A. Awal menyiagakan masyarakat.</li>
+                        <li>B. Awal persatuan bangsa.</li>
+                        <li>C. Awal merangkai persatuan.</li>
+                        <li>D. Masa perwujudan kemandirian.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>86. Lambang Gerakan Pramuka ditetapkan pertama kali melalui Keputusan Presiden RI Nomor 448 tahun 1961 yang menganugrahkan Panji. Lambang ini dikuatkan kembali dengan Surat Keputusan Kwartir Nasional Gerakan Pramuka Nomor...</strong>
+                    <ol class="options">
+                        <li>A. 238/61 tahun 1961.</li>
+                        <li>B. 06/KN/72 tahun 1972.</li>
+                        <li>C. 058 tahun 1982.</li>
+                        <li>D. 088/KN/74 tahun 1974.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>87. Benteng Duurstede terletak di...</strong>
+                    <ol class="options">
+                        <li>A. Aceh.</li>
+                        <li>B. Banten.</li>
+                        <li>C. Maluku.</li>
+                        <li>D. Sumatra Barat.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>88. Organisasi untuk Pandu Putri, the Girl Guides, didirikan pada tahun 1910 dan memiliki kelompok Siaga Putri yang disebut...</strong>
+                    <ol class="options">
+                        <li>A. Girl Guide.</li>
+                        <li>B. Ranger Guide.</li>
+                        <li>C. Brownie Guide.</li>
+                        <li>D. Cub Scout.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>89. Jambore Dunia ke-XX (2003) diselenggarakan di negara...</strong>
+                    <ol class="options">
+                        <li>A. Chile.</li>
+                        <li>B. Korea Selatan.</li>
+                        <li>C. Thailand.</li>
+                        <li>D. Inggris.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>90. Metode Kepramukaan yang berkaitan dengan kiasan Siaga, Penggalang, Penegak, dan Pandega adalah...</strong>
+                    <ol class="options">
+                        <li>A. Belajar sambil melakukan.</li>
+                        <li>B. Sistem tanda kecakapan.</li>
+                        <li>C. Kiasan dasar.</li>
+                        <li>D. Kegiatan di alam terbuka.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+    <!-- SLIDE 10 -->
+    <div class="slide">
+        <h2>📝 SLIDE 10 (Soal 91 - 100)</h2>
+        <div class="grid-container">
+            <div class="column">
+                <div class="question">
+                    <strong>91. Yang dimaksud dengan <em>kepemimpinan</em> atau <em>leadership</em> adalah...</strong>
+                    <ol class="options">
+                        <li>A. Kemampuan untuk menyusun perencanaan yang matang.</li>
+                        <li>B. Kemampuan untuk mengumpulkan dana organisasi.</li>
+                        <li>C. Kemampuan untuk mempengaruhi dan mengerakkan orang lain guna mencapai tujuan tertentu.</li>
+                        <li>D. Kemampuan untuk menguasai anggota.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>92. Jabatan Presiden RI ke-7 yang diemban oleh Ir. H. Joko Widodo didampingi oleh wakil presiden pada periode 2019-2024 adalah...</strong>
+                    <ol class="options">
+                        <li>A. Muhammad Jusuf Kalla.</li>
+                        <li>B. Basuki Tjahaja Purnama.</li>
+                        <li>C. KH Ma'ruf Amin.</li>
+                        <li>D. Boediono.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>93. Saka yang bergerak di bidang Kesehatan adalah...</strong>
+                    <ol class="options">
+                        <li>A. Saka Kencana.</li>
+                        <li>B. Saka Bakti Husada.</li>
+                        <li>C. Saka Bhayangkara.</li>
+                        <li>D. Saka Dirgantara.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>94. Tanda Regu (Penggalang) dan Tanda Barung (Siaga) dikategorikan sebagai Tanda...</strong>
+                    <ol class="options">
+                        <li>A. Umum.</li>
+                        <li>B. Satuan.</li>
+                        <li>C. Jabatan.</li>
+                        <li>D. Kecakapan.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>95. Jambore Nasional yang diselenggarakan di Baturaden, Banyumas, Jawa Tengah terjadi pada tahun...</strong>
+                    <ol class="options">
+                        <li>A. 1996.</li>
+                        <li>B. 2001.</li>
+                        <li>C. 2006.</li>
+                        <li>D. 2011.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="column">
+                <div class="question">
+                    <strong>96. Motto para pandu di seluruh dunia adalah...</strong>
+                    <ol class="options">
+                        <li>A. Tut Wuri Handayani.</li>
+                        <li>B. Be Prepared.</li>
+                        <li>C. Ing Ngarso Sung Tulodo.</li>
+                        <li>D. Rovering To Success.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>97. Yang dimaksud dengan <em>Jambore</em> adalah pertemuan untuk golongan...</strong>
+                    <ol class="options">
+                        <li>A. Siaga.</li>
+                        <li>B. Penggalang.</li>
+                        <li>C. Penegak.</li>
+                        <li>D. Pandega.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>98. Sifat Kepanduan berdasarkan Resolusi Konferensi Kepramukaan Sedunia 1924, yang bertujuan mengembangkan rasa persaudaraan antar sesama anggota, adalah sifat...</strong>
+                    <ol class="options">
+                        <li>A. Nasional.</li>
+                        <li>B. Universal.</li>
+                        <li>C. Internasional.</li>
+                        <li>D. Sukarela.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>99. Apa nama organisasi olahraga internasional untuk cabang Judo?</strong>
+                    <ol class="options">
+                        <li>A. IHF.</li>
+                        <li>B. FEI.</li>
+                        <li>C. IJF.</li>
+                        <li>D. FOTA.</li>
+                    </ol>
+                </div>
+                <div class="question">
+                    <strong>100. Kiasan dasar yang bermakna "membina Bangsa dan Negara" adalah istilah...</strong>
+                    <ol class="options">
+                        <li>A. Pandega.</li>
+                        <li>B. Andalan.</li>
+                        <li>C. Pamong.</li>
+                        <li>D. Pembina.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">Modul Scout Intelligent SMP/MTs - LOGIKA 7</div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="foot">
+      Gunakan tombol <b>Jeda/Putar</b> untuk kontrol otomatis. Tekan <kbd>←</kbd>/<kbd>→</kbd> untuk pindah slide. <span id="footHint"></span>
+    </div>
+  </footer>
+
+  <script>
+    // ====== Slideshow logic ======
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let current = 0;
+    let duration = 120; // detik
+    let startTs = null;
+    let rafId = null;
+    let playing = true;
+    let loop = true;
+
+    const progressEl = document.getElementById('progress');
+    const countdownEl = document.getElementById('countdown');
+    const statusText = document.getElementById('statusText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const slideSelect = document.getElementById('slideSelect');
+    const durationInput = document.getElementById('durationInput');
+    const resetTimerBtn = document.getElementById('resetTimerBtn');
+    const loopToggle = document.getElementById('loopToggle');
+
+    // Populate slide selector
+    slides.forEach((_, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = `Slide ${i+1}`;
+      slideSelect.appendChild(opt);
+    });
+
+    function showSlide(index, {resetTimer=true} = {}){
+      if(index < 0) index = 0;
+      if(index >= slides.length) index = slides.length - 1;
+      slides.forEach((el,i)=> el.classList.toggle('active', i===index));
+      current = index;
+      statusText.textContent = `Slide ${index+1}/${slides.length}`;
+      slideSelect.value = String(index);
+      if(resetTimer){
+        startTs = performance.now();
+      }
+      updateButtons();
+    }
+
+    function updateButtons(){
+      prevBtn.disabled = (current===0 && !loop);
+      nextBtn.disabled = (current===slides.length-1 && !loop);
+      playPauseBtn.textContent = playing ? '⏸ Jeda' : '▶️ Putar';
+    }
+
+    function formatTime(sec){
+      sec = Math.max(0, Math.ceil(sec));
+      const m = String(Math.floor(sec/60)).padStart(2,'0');
+      const s = String(sec%60).padStart(2,'0');
+      return `${m}:${s}`;
+    }
+
+    function tick(now){
+      if(!startTs) startTs = now;
+      const elapsed = (now - startTs)/1000;
+      const remain = duration - elapsed;
+      const pct = Math.min(100, Math.max(0, (elapsed/duration)*100));
+      progressEl.style.width = pct + '%';
+      countdownEl.textContent = formatTime(remain);
+
+      if(playing){
+        if(remain <= 0){
+          // advance
+          let nextIndex = current + 1;
+          if(nextIndex >= slides.length){
+            if(loop){ nextIndex = 0; }
+            else { playing = false; updateButtons(); cancelAnimationFrame(rafId); return; }
+          }
+          showSlide(nextIndex, {resetTimer:true});
+        }
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+
+    // Controls
+    prevBtn.addEventListener('click', ()=>{
+      const prevIndex = current-1 < 0 ? (loop? slides.length-1 : 0) : current-1;
+      showSlide(prevIndex);
+    });
+    nextBtn.addEventListener('click', ()=>{
+      const nextIndex = current+1 >= slides.length ? (loop? 0 : slides.length-1) : current+1;
+      showSlide(nextIndex);
+    });
+    playPauseBtn.addEventListener('click', ()=>{
+      playing = !playing;
+      updateButtons();
+      if(playing){ startTs = performance.now(); tick(startTs); }
+      else { cancelAnimationFrame(rafId); }
+    });
+    slideSelect.addEventListener('change', (e)=>{
+      showSlide(parseInt(e.target.value,10));
+    });
+    durationInput.addEventListener('input', ()=>{
+      const v = Math.max(10, parseInt(durationInput.value||'120',10));
+      duration = v;
+      startTs = performance.now();
+    });
+    resetTimerBtn.addEventListener('click', ()=>{ startTs = performance.now(); });
+    loopToggle.addEventListener('change', ()=>{ loop = loopToggle.checked; updateButtons(); });
+
+    // Keyboard shortcuts
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight') { nextBtn.click(); }
+      if(e.key === 'ArrowLeft')  { prevBtn.click(); }
+      if(e.key === ' ') { e.preventDefault(); playPauseBtn.click(); }
+    });
+
+    // Init
+    showSlide(0);
+    startTs = performance.now();
+    tick(startTs);
+  </script>
+</body>
+</html>
